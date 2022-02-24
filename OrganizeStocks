@@ -1,0 +1,10 @@
+#comment
+ListLocation="~/List.sc"
+ListLocation=$1
+for (( i=1; i<=`wc -l $ListLocation | awk '{print $1}'`; i++ ))
+do
+	echo "Still Working!"
+	Ticker=`head -n $i OrganizeStocks | tail -n+$i | tr A-Z a-z`
+	curl -s https://www.nasdaq.com/market-activity/stocks/$Ticker > EV1.sc
+	grep "<path d=\"M " EV1.sc > EV2.sc
+done
